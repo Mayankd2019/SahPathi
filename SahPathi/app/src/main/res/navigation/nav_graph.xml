@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/time_table">
+
+    <fragment
+        android:id="@+id/time_table"
+        android:name="in.falconfour.sahpathi.Fragments.TimeTableFragment"
+        android:label="fragment_time_table"
+        tools:layout="@layout/fragment_time_table" />
+    <fragment
+        android:id="@+id/resources"
+        android:name="in.falconfour.sahpathi.Fragments.ResourcesFragment"
+        android:label="fragment_resources"
+        tools:layout="@layout/fragment_resources" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="in.falconfour.sahpathi.Fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

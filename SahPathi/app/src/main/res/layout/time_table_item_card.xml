@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backgroud_image_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mybtn2" />
+
+        <TextView
+            android:id="@+id/subject_tv"
+            android:layout_width="142dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Subject"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.474"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/start_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08:00"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/subject_tv"
+            app:layout_constraintEnd_toStartOf="@+id/subject_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/subject_tv"
+            tools:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/end_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09:00"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/subject_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subject_tv"
+            app:layout_constraintTop_toTopOf="@+id/subject_tv" />
+
+        <ImageButton
+            android:id="@+id/link_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/end_time_tv"
+            app:layout_constraintTop_toBottomOf="@+id/subject_tv"
+            app:srcCompat="@drawable/ic_send_black_24dp" />
+
+        <TextView
+            android:id="@+id/teacher_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By Miss Katrina"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/link_button"
+            app:layout_constraintStart_toStartOf="@+id/start_time_tv"
+            app:layout_constraintTop_toTopOf="@+id/link_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

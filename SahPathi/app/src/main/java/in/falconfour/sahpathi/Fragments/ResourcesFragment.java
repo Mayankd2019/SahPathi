@@ -13,7 +13,7 @@ import in.falconfour.sahpathi.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResourcesFragment extends Fragment {
+public class ResourcesFragment extends Fragment implements ResourcesFragmentAdapter.resourcesCardClickInterface{
 
     public ResourcesFragment() {
         // Required empty public constructor
@@ -25,5 +25,10 @@ public class ResourcesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_resources, container, false);
+    }
+
+    @Override
+    public void onClickResourcesSubjectCard(int position) {
+
     }
 }

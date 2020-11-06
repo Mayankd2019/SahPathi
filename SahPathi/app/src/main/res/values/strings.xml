@@ -3,4 +3,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="timetable_fragment_heading">My Schedule</string>
+    <string name="time_table_fragment_mon">Mon</string>
+    <string name="time_table_fragment_tue">Tue</string>
+    <string name="time_table_fragment_wed">Wed</string>
+    <string name="time_table_fragment_thu">Thu</string>
+    <string name="time_table_fragment_fri">Fri</string>
+    <string name="time_table_fragment_sat">Sat</string>
+    <string name="time_table_fragment_sun">Sun</string>
+
+
+    <string name="resources_fragment_heading">My Resources</string>
 </resources>

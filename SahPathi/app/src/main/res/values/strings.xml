@@ -3,6 +3,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Username">Shikhar Srivastava</string>
+    <string name="collegename">Dr B.R. Ambedkar NIT Jalandhar</string>
+    <string name="branch">Instrumentation and Control engineering</string>
+    <string name="group">ICE-B3</string>
+
     <string name="timetable_fragment_heading">My Schedule</string>
     <string name="time_table_fragment_mon">Mon</string>
     <string name="time_table_fragment_tue">Tue</string>

@@ -9,14 +9,14 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="463dp"
+        android:layout_width="0dp"
         android:layout_height="459dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/signup"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="-19dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView4"
@@ -53,6 +53,7 @@
             android:src="@drawable/mailicon" />
 
         <EditText
+            android:id="@+id/sign_up_email"
             android:layout_width="280dp"
             android:layout_height="56dp"
             android:layout_marginLeft="28dp"
@@ -83,6 +84,8 @@
             android:src="@drawable/passicon" />
 
         <EditText
+            android:id="@+id/sign_up_password"
+            android:inputType="textPassword"
             android:layout_width="280dp"
             android:layout_height="56dp"
             android:layout_marginLeft="28dp"
@@ -112,6 +115,7 @@
             android:src="@drawable/university" />
 
         <EditText
+            android:id="@+id/sign_up_college"
             android:layout_width="280dp"
             android:layout_height="56dp"
             android:layout_marginLeft="28dp"
@@ -141,6 +145,7 @@
             android:src="@drawable/branchicon" />
 
         <EditText
+            android:id="@+id/sign_up_branch"
             android:layout_width="280dp"
             android:layout_height="56dp"
             android:layout_marginLeft="28dp"
@@ -164,7 +169,7 @@
         app:layout_constraintVertical_bias="0.734" />
 
     <Button
-        android:id="@+id/done"
+        android:id="@+id/done_button"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -179,6 +184,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView9"
         app:layout_constraintVertical_bias="0.029" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_signup"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

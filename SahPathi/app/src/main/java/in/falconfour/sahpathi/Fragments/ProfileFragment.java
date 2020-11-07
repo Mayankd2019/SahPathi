@@ -23,6 +23,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,6 +34,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import in.falconfour.sahpathi.LoginActivity;
+import in.falconfour.sahpathi.MainActivity;
 import in.falconfour.sahpathi.R;
 
 import static android.app.Activity.RESULT_OK;
@@ -40,7 +46,10 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     ImageView dpchange;
+    private ImageView logoutIv;
+    private TextView logoutTv;
 
+    private FirebaseAuth mAuth;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -58,8 +67,33 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          View myView = inflater.inflate(R.layout.fragment_profile, container, false);
+         logoutTv = myView.findViewById(R.id.logoutTv);
+         logoutIv = myView.findViewById(R.id.logout_iv);
+
+
+         //picking up the dp
         dpchange = (ImageView) myView.findViewById(R.id.dpchange);
         dpchange.setOnClickListener(this);
+
+        logoutIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //logging Out
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+
+        logoutTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //logging Out
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
         return myView;
 
     }

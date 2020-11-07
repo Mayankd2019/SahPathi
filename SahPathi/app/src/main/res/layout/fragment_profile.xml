@@ -9,11 +9,11 @@
 
   <ImageView
       android:id="@+id/imageView5"
-      android:layout_width="wrap_content"
-      android:layout_height="240dp"
-      android:layout_marginEnd="32dp"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
       android:src="@drawable/shapes1"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.cardview.widget.CardView
@@ -142,29 +142,27 @@
   </androidx.cardview.widget.CardView>
 
   <ImageView
-      android:id="@+id/imageView6"
+      android:id="@+id/logout_iv"
       android:layout_width="20dp"
       android:layout_height="20dp"
+      android:layout_marginEnd="8dp"
       android:src="@drawable/logouticon"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.69"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/cardView3"
-      app:layout_constraintVertical_bias="0.218" />
+      app:layout_constraintBottom_toBottomOf="@+id/logoutTv"
+      app:layout_constraintEnd_toStartOf="@+id/logoutTv"
+      app:layout_constraintTop_toTopOf="@+id/logoutTv"
+      app:layout_constraintVertical_bias="0.172" />
 
   <TextView
-      android:id="@+id/textView3"
+      android:id="@+id/logoutTv"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:fontFamily="@font/adobecleanbold"
+      android:gravity="center"
       android:text="Logout?"
       android:textColor="@color/colorPrimary"
       android:textSize="20dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.36"
-      app:layout_constraintStart_toEndOf="@+id/imageView6"
+      app:layout_constraintEnd_toEndOf="@+id/cardView3"
       app:layout_constraintTop_toBottomOf="@+id/cardView3"
       app:layout_constraintVertical_bias="0.173" />
 

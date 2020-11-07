@@ -50,7 +50,7 @@ public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFrag
 
     @Override
     public int getItemCount() {
-        if(mSubjectList.size() != 0){
+        if(mSubjectList != null){
             return mSubjectList.size();
         }
         return 0;

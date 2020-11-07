@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/adobecleanbold"
         android:text="@string/resources_fragment_heading"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#101010"

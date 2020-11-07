@@ -3,21 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/time_table">
+    app:startDestination="@id/fragment_time_table">
 
     <fragment
-        android:id="@+id/time_table"
+        android:id="@+id/fragment_time_table"
         android:name="in.falconfour.sahpathi.Fragments.TimeTableFragment"
         android:label="fragment_time_table"
         tools:layout="@layout/fragment_time_table" />
     <fragment
-        android:id="@+id/resources"
+        android:id="@+id/fragment_resources"
         android:name="in.falconfour.sahpathi.Fragments.ResourcesFragment"
         android:label="fragment_resources"
-        tools:layout="@layout/fragment_resources" />
+        tools:layout="@layout/fragment_resources" >
+        <action
+            android:id="@+id/action_resources_to_subjectFragment"
+            app:destination="@id/subjectFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
+    </fragment>
     <fragment
-        android:id="@+id/profile"
+        android:id="@+id/fragment_profile"
         android:name="in.falconfour.sahpathi.Fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/subjectFragment"
+        android:name="in.falconfour.sahpathi.Fragments.SubjectFragment"
+        android:label="fragment_subject"
+        tools:layout="@layout/fragment_subject" />
 </navigation>

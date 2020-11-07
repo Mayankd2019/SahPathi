@@ -40,94 +40,94 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/adobecleanbold"
         android:text="@string/timetable_fragment_heading"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#101010"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/mon_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/time_table_fragment_mon"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/tue_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/time_table_fragment_tue"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/mon_tv"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/wed_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/time_table_fragment_wed"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tue_tv"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/thu_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/time_table_fragment_thu"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/wed_tv"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/fri_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/time_table_fragment_fri"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/thu_tv"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/sat_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/time_table_fragment_sat"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/fri_tv"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/time_table_fragment_sun"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/sat_tv"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/time_table_fragment_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mon_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/mon_button" />
 
+    <Button
+        android:id="@+id/mon_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_mon"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/tue_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_tue"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/mon_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/wed_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_wed"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/tue_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/thu_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_thu"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/wed_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/fri_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_fri"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/thu_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/sat_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_sat"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/fri_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/sun_button"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:background="@color/cardview_light_background"
+        android:text="@string/time_table_fragment_sun"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/sat_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

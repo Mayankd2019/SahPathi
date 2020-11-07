@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import in.falconfour.sahpathi.R;
+import in.falconfour.sahpathi.Subject;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ResourcesFragment extends Fragment implements ResourcesFragmentAdapter.resourcesCardClickInterface{
-
+    private ArrayList<Subject> mSubjectList;
     public ResourcesFragment() {
         // Required empty public constructor
     }

@@ -30,5 +30,10 @@
         android:id="@+id/subjectFragment"
         android:name="in.falconfour.sahpathi.Fragments.SubjectFragment"
         android:label="fragment_subject"
-        tools:layout="@layout/fragment_subject" />
+        tools:layout="@layout/fragment_subject" >
+        <argument
+            android:name="subjectName"
+            app:argType="string"
+            android:defaultValue="Default" />
+    </fragment>
 </navigation>

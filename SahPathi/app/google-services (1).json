@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "910686112436",
+    "firebase_url": "https://sahpathi-14655.firebaseio.com",
+    "project_id": "sahpathi-14655",
+    "storage_bucket": "sahpathi-14655.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910686112436:android:c1326ee9ed9fa51c5ba5e1",
+        "android_client_info": {
+          "package_name": "in.falconfour.sahpathi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910686112436-munurhoefcq0uu6qvufkkh61fmn4k43d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjw6euLJ7stkrkR98p42ViZXvwgVRPZuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910686112436-munurhoefcq0uu6qvufkkh61fmn4k43d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

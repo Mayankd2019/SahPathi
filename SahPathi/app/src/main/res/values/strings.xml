@@ -20,4 +20,22 @@
 
 
     <string name="resources_fragment_heading">My Resources</string>
+
+    <!-- Strings for On Boarding Screen -->
+
+    <!--Titles-->
+    <string name="first_slide_title">Plan your classes well!  </string>
+    <string name="second_slide_title"> Stay Updated</string>
+    <string name="third_slide_title">Your Smart Friend</string>
+
+    <!--Descriptions-->
+    <string name="first_slide_desc">Helps you Plan your weekly and monthly goals and keep a track on your time table and classrooms.</string>
+    <string name="second_slide_desc">Notifies you before the start and end of your lectures and helps in attending online classes with ease. </string>
+    <string name="third_slide_desc">If you have a shop or somethings and want to be a part of our growing industry then add your place by follwing simple steps.</string>
+
+    <!--Buttons-->
+    <string name="skip_btn">Skip</string>
+    <string name="next_btn">Next</string>
+    <string name="let_get_started">Lets Get Started</string>
+
 </resources>

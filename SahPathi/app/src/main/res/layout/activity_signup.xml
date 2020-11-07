@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="463dp"
+        android:layout_height="459dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/signup"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-19dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/adobecleanbold"
+        android:text="Let's Be \nFriends"
+        android:textColor="@android:color/black"
+        android:textSize="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView6"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="196dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/mailicon" />
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:background="@null"
+            android:hint="Email"
+            android:padding="12dp" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView7"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView6">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/passicon" />
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:background="@null"
+            android:hint="Password"
+            android:padding="12dp" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView8"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView7">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/university" />
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:background="@null"
+            android:hint="College"
+            android:padding="12dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView9"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView8"
+        app:layout_constraintVertical_bias="0.098">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/branchicon" />
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:background="@null"
+            android:hint="Branch"
+            android:padding="12dp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/logintext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:fontFamily="@font/adobecleanbold"
+        android:text="Already a User?\nLog In"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView9"
+        app:layout_constraintVertical_bias="0.734" />
+
+    <Button
+        android:id="@+id/done"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/mybtn2round"
+        android:text="Done"
+        android:clickable="true"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView9"
+        app:layout_constraintVertical_bias="0.029" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

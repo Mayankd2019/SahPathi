@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,107 +8,177 @@
 
 
   <ImageView
+      android:id="@+id/imageView5"
       android:layout_width="wrap_content"
       android:layout_height="240dp"
+      android:layout_marginEnd="32dp"
       android:src="@drawable/shapes1"
-      android:layout_marginLeft="-24dp"/>
-  <de.hdodenhof.circleimageview.CircleImageView
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      android:id="@+id/profile_image"
-      android:layout_width="160dp"
-      android:layout_height="160dp"
-      android:layout_marginLeft="112dp"
-      android:layout_marginTop="80dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-      android:src="@drawable/profileicon"
-      app:civ_border_width="2dp"
-      app:civ_border_color="#FF000000"/>
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/Username"
-      android:textSize="36dp"
-      android:fontFamily="@font/adobecleanbold"
-      android:textColor="@android:color/black"
-      android:layout_marginLeft="56dp"
-    android:layout_marginTop="260dp"/>
   <androidx.cardview.widget.CardView
+      android:id="@+id/cardView2"
       android:layout_width="360dp"
       android:layout_height="80dp"
-    android:layout_marginLeft="24dp"
-      android:layout_marginTop="320dp"
+      android:layout_marginTop="12dp"
       app:cardCornerRadius="10dp"
-      app:cardElevation="32dp">
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/university"
-        android:background="#00ffffff"
-        android:layout_marginTop="16dp"
-      android:layout_marginLeft="8dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/collegename"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
-        android:fontFamily="@font/adobecleanbold"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="24dp"/>
+      app:cardElevation="32dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.49"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-  </androidx.cardview.widget.CardView>
-  <androidx.cardview.widget.CardView
-      android:layout_width="360dp"
-      android:layout_height="80dp"
-      android:layout_marginLeft="24dp"
-      android:layout_marginTop="420dp"
-      app:cardCornerRadius="10dp"
-      app:cardElevation="32dp">
     <ImageView
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/branchicon"
-        android:background="#00ffffff"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="18dp"
-        android:layout_marginLeft="8dp"/>
+        android:background="#00ffffff"
+        android:src="@drawable/branchicon" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/branch"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
         android:fontFamily="@font/adobecleanbold"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="20dp"/>
+        android:text="@string/branch"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp" />
+
   </androidx.cardview.widget.CardView>
+
   <androidx.cardview.widget.CardView
+      android:id="@+id/cardView3"
       android:layout_width="360dp"
       android:layout_height="80dp"
-      android:layout_marginLeft="24dp"
-      android:layout_marginTop="520dp"
+      android:layout_marginTop="16dp"
       app:cardCornerRadius="10dp"
-      app:cardElevation="32dp">
+      app:cardElevation="32dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.49"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cardView2"
+      app:layout_constraintVertical_bias="0.0">
+
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/groupicon"
-        android:background="#00ffffff"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"/>
+        android:background="#00ffffff"
+        android:src="@drawable/groupicon" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/adobecleanbold"
         android:text="@string/group"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
-        android:fontFamily="@font/adobecleanbold"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="24dp"/>
+        android:textSize="20dp" />
+
   </androidx.cardview.widget.CardView>
 
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/circlepic"
+      android:layout_width="160dp"
+      android:layout_height="160dp"
+
+      android:src="@drawable/profileicon"
+      app:civ_border_color="#FF000000"
+      app:civ_border_width="2dp"
+      app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.438"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+  <TextView
+      android:id="@+id/textView5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/adobecleanbold"
+      android:text="@string/Username"
+      android:textColor="@android:color/black"
+      android:textSize="36dp"
+      app:layout_constraintBottom_toTopOf="@+id/cardView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/cardView"
+      android:layout_width="360dp"
+      android:layout_height="80dp"
+      android:layout_marginTop="20dp"
+      app:cardCornerRadius="10dp"
+      app:cardElevation="32dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.49"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:background="#00ffffff"
+        android:src="@drawable/university" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/adobecleanbold"
+        android:text="@string/collegename"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="56dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp" />
+
+  </androidx.cardview.widget.CardView>
+
+  <ImageView
+      android:id="@+id/imageView6"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:src="@drawable/logouticon"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.69"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cardView3"
+      app:layout_constraintVertical_bias="0.218" />
+
+  <TextView
+      android:id="@+id/textView3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/adobecleanbold"
+      android:text="Logout?"
+      android:textColor="@color/colorPrimary"
+      android:textSize="20dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.36"
+      app:layout_constraintStart_toEndOf="@+id/imageView6"
+      app:layout_constraintTop_toBottomOf="@+id/cardView3"
+      app:layout_constraintVertical_bias="0.173" />
+
+  <ImageView
+      android:id="@+id/dpchange"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="148dp"
+      android:src="@drawable/edit_icon"
+      app:layout_constraintBottom_toTopOf="@+id/textView5"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.605"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
 
-
-   
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

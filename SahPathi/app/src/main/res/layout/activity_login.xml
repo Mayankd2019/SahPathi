@@ -10,10 +10,11 @@
         android:id="@+id/imageView"
         android:layout_width="528dp"
         android:layout_height="461dp"
-        android:layout_marginBottom="308dp"
+        android:layout_marginBottom="228dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/login"
-        tools:layout_editor_absoluteX="-59dp" />
+        tools:layout_editor_absoluteX="-59dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
@@ -29,4 +30,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.112" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="268dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/usericon"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="4dp"/>
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:padding="12dp"
+            android:hint="Username"
+            android:background="@null"/>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView4" >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/passicon"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="4dp"/>
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:padding="12dp"
+            android:hint="Password"
+            android:background="@null"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:background="@drawable/mybtn2round"
+        android:text="Log In"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:fontFamily="@font/adobecleanbold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView5"
+        app:layout_constraintVertical_bias="0.219" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

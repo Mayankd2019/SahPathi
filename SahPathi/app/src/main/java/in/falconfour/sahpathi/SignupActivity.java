@@ -44,7 +44,7 @@ public class SignupActivity extends AppCompatActivity {
 
    private String email;
    private String password;
-   private String branch;
+   public String branchSignUp;
    private String college;
 
     @Override
@@ -79,11 +79,11 @@ public class SignupActivity extends AppCompatActivity {
                 signupProgressBar.setVisibility(View.VISIBLE);
                 email = signupEmailTv.getText().toString();
                 password = signupPasswordTv.getText().toString();
-                branch = signupBranchTv.getText().toString();
+                branchSignUp = signupBranchTv.getText().toString();
                 college = signupCollegeTv.getText().toString();
                 SharedPreferences.Editor signupSharedPreferenceEditor = signupSharedPref.edit();
-                signupSharedPreferenceEditor.putString("BRANCH",branch);
-                signupSharedPreferenceEditor.putString("COLLEGE",college);
+                signupSharedPreferenceEditor.putString("BRANCH", branchSignUp).apply();
+                signupSharedPreferenceEditor.putString("COLLEGE",college).apply();
                 if(password.length() >= 6 && email != null ){
                     mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this,
                             new OnCompleteListener<AuthResult>() {
@@ -93,7 +93,7 @@ public class SignupActivity extends AppCompatActivity {
                                         FirebaseUser currentUser = mAuth.getCurrentUser();
                                         //userHashMap.put(getString(R.string.user_data_email),email);
                                         userHashMap.put(getString(R.string.user_data_college),college);
-                                        userHashMap.put(getString(R.string.user_data_branch),branch);
+                                        userHashMap.put(getString(R.string.user_data_branch), branchSignUp);
                                         db.collection(getString(R.string.collection_user)).document(email).set(userHashMap)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override

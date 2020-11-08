@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         // Get new FCM registration token
                         String token = task.getResult();
                         SharedPreferences mainActivitySharedPreference = getPreferences(MODE_PRIVATE);
-                        mainActivitySharedPreference.edit().putString("TOKEN",token);
+                        mainActivitySharedPreference.edit().putString("TOKEN",token).apply();
                         // Log and toast
                         /*String msg = getString(R.string.msg_token_fmt, token);
                         Log.d(TAG, msg);

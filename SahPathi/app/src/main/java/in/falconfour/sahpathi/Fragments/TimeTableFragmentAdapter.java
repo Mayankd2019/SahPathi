@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,7 +67,7 @@ public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFrag
         private TextView startTimeTv;
         private TextView endTimeTv;
         private TextView teacherTv;
-        private Button linkJoinButton;
+        private ImageButton linkJoinButton;
         private JoiningLinkClickListener joiningLinkClickListener;
 
         public TimeTableCardViewHolder(@NonNull View itemView, JoiningLinkClickListener joiningLinkClickListener) {

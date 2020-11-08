@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.falconfour.sahpathi.R;
+import in.falconfour.sahpathi.SignupActivity;
 import in.falconfour.sahpathi.Subject;
 import in.falconfour.sahpathi.User;
 
@@ -42,16 +43,16 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
     private ArrayList<Subject> mSubjectList ;
     //private ArrayList<HashMap<String,Object>> mSubjectList2;
     //private HashMap<String,Object> subjectHashMap = new HashMap<>();
-    private Subject subject = new Subject();
+    //private Subject subject = new Subject();
 
 
     private RecyclerView timeTableFragmentRv;
     private LinearLayoutManager layoutManager;
     private TimeTableFragmentAdapter adapter;
-    private String dayOfTheWeek;
-    private String email;
-    private String branch;
-    private String college;
+    private static String dayOfTheWeek;
+    private static String email;
+    static String branch;
+    static String college;
 
     private Button monday_btn;
     private Button tuesday_btn;
@@ -98,13 +99,13 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         monday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Mon");
             }
         });
         tuesday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Mon");
             }
         });
 
@@ -117,25 +118,25 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         thursday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Mon");
             }
         });
         friday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Mon");
             }
         });
         saturday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Mon");
             }
         });
         sunday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Mon");
             }
         });
 
@@ -144,14 +145,10 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         return v;
     }
 
-    private String fetchDayOfTheWeek() {
-        dayOfTheWeek = getActivity().getPreferences(Context.MODE_PRIVATE).getString("DAY_OF_THE_WEEK","Mon");
-        return dayOfTheWeek;
-    }
-
     private void fetchDayData(String dayOfTheWeek) {
         email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        DocumentReference documentReference = db.collection(getString(R.string.collection_user)).document(email);
+
+        /*DocumentReference documentReference = db.collection(getString(R.string.collection_user)).document(email);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -164,10 +161,10 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
                     Log.d("failed for user","failed for user");
                 }
             }
-        });
+        });*/
 
 
-        db.collection(getString(R.string.collection_time_table)).document(branch)
+        db.collection("timetable").document("ICE")
                 .collection("Mon")
             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -175,11 +172,13 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("doc fetching", document.getId() + " => " + document.getData());
-                        subject = document.toObject(Subject.class);
+                        Subject subject = document.toObject(Subject.class);
                         if(subject!=null) {
                             mSubjectList.add(subject);
                         }
+
                     }
+
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());
                 }
@@ -188,7 +187,11 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
 
 
         if(adapter!=null) {
+            if(mSubjectList==null){
+                Log.d("subject list","null how come");
+            }
             adapter.setAdapterSettings(mSubjectList);
+
         } else {
             Log.d("adapter error","adapter hi bc null ho gaya!");
         }

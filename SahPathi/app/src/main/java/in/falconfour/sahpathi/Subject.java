@@ -1,50 +1,62 @@
 package in.falconfour.sahpathi;
 
 public class Subject {
-    private String subjectName;
-    private String meetLink;
-    private String startTime;
-    private String endTime;
-    private String teacherName;
+    private String SUBJECT;
+    private String LINK;
+    private String START_TIME;
+    private String END_TIME;
+    private String POSITION;
 
-    public String getTeacherName() {
+    //private String teacherName;
+
+    /*public String getTeacherName() {
         return teacherName;
     }
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }*/
+
+    public Subject() {
     }
 
-    public Subject(String subjectName, String meetLink) {
-        this.subjectName = subjectName;
-        this.meetLink = meetLink;
+    public String getPOSITION() {
+        return POSITION;
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public void setPOSITION(String POSITION) {
+        this.POSITION = POSITION;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getSUBJECT() {
+        return SUBJECT;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getSTART_TIME() {
+        return START_TIME;
     }
 
-    public String getMeetLink() {
-        return meetLink;
+    public String getEND_TIME() {
+        return END_TIME;
     }
 
-    public void setMeetLink(String meetLink) {
-        this.meetLink = meetLink;
+    public String getLINK() {
+        return LINK;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setLINK(String LINK) {
+        this.LINK = LINK;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setSTART_TIME(String START_TIME) {
+        this.START_TIME = START_TIME;
+    }
+
+    public void setEND_TIME(String END_TIME) {
+        this.END_TIME = END_TIME;
+    }
+
+    public void setSUBJECT(String SUBJECT) {
+        this.SUBJECT = SUBJECT;
     }
 }

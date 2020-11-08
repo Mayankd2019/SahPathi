@@ -64,6 +64,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:background="@color/cardview_light_background"
+        android:onClick="mondayButtonClicked"
         android:text="@string/time_table_fragment_mon"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +75,7 @@
         android:layout_width="53dp"
         android:layout_height="22dp"
         android:background="@color/cardview_light_background"
+        android:onClick="tuesdayButtonClicked"
         android:text="@string/time_table_fragment_tue"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/mon_button"
@@ -84,6 +86,7 @@
         android:layout_width="53dp"
         android:layout_height="22dp"
         android:background="@color/cardview_light_background"
+        android:onClick="wednesdayButtonClicked"
         android:text="@string/time_table_fragment_wed"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/tue_button"
@@ -94,6 +97,7 @@
         android:layout_width="53dp"
         android:layout_height="22dp"
         android:background="@color/cardview_light_background"
+        android:onClick="thursdayButtonClicked"
         android:text="@string/time_table_fragment_thu"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/wed_button"
@@ -104,6 +108,7 @@
         android:layout_width="53dp"
         android:layout_height="22dp"
         android:background="@color/cardview_light_background"
+        android:onClick="firdayButtonClicked"
         android:text="@string/time_table_fragment_fri"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/thu_button"
@@ -114,6 +119,7 @@
         android:layout_width="53dp"
         android:layout_height="22dp"
         android:background="@color/cardview_light_background"
+        android:onClick="saturdayButtonClicked"
         android:text="@string/time_table_fragment_sat"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/fri_button"
@@ -124,10 +130,23 @@
         android:layout_width="53dp"
         android:layout_height="22dp"
         android:background="@color/cardview_light_background"
+        android:onClick="sundayButtonClicked"
         android:text="@string/time_table_fragment_sun"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/sat_button"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

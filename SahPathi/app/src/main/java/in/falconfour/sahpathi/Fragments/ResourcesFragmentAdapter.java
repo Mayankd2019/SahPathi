@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class ResourcesFragmentAdapter extends RecyclerView.Adapter<ResourcesFrag
     @Override
     public void onBindViewHolder(@NonNull ResourcesFragmentViewHolder holder, int position) {
         Subject currentSubject = mSubjectList.get(position);
-        holder.subjectTv.setText(currentSubject.getSubjectName());
+        holder.subjectTv.setText(currentSubject.getSUBJECT());
     }
 
     @Override

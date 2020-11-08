@@ -1,10 +1,11 @@
 package in.falconfour.sahpathi.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,21 +15,45 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import in.falconfour.sahpathi.R;
 import in.falconfour.sahpathi.Subject;
+import in.falconfour.sahpathi.User;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TimeTableFragment extends Fragment implements TimeTableFragmentAdapter.JoiningLinkClickListener {
-    private ArrayList<Subject> mSubjectList;
+    private ArrayList<Subject> mSubjectList ;
+    //private ArrayList<HashMap<String,Object>> mSubjectList2;
+    //private HashMap<String,Object> subjectHashMap = new HashMap<>();
+    private Subject subject = new Subject();
+
+
     private RecyclerView timeTableFragmentRv;
     private LinearLayoutManager layoutManager;
     private TimeTableFragmentAdapter adapter;
+    private String dayOfTheWeek;
+    private String email;
+    private String branch;
+    private String college;
+
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public TimeTableFragment() {
         // Required empty public constructor
@@ -45,14 +70,106 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         adapter = new TimeTableFragmentAdapter(getContext(),this);
         timeTableFragmentRv.setLayoutManager(layoutManager);
         timeTableFragmentRv.setAdapter(adapter);
+        mSubjectList = new ArrayList<>();
+
         adapter.setAdapterSettings(mSubjectList);
+
+        dayOfTheWeek = getActivity().getPreferences(Context.MODE_PRIVATE).getString("DAY_OF_THE_WEEK","Mon");
+        fetchDayData(dayOfTheWeek);
+
         return v;
+    }
+
+    private String fetchDayOfTheWeek() {
+        dayOfTheWeek = getActivity().getPreferences(Context.MODE_PRIVATE).getString("DAY_OF_THE_WEEK","Mon");
+        return dayOfTheWeek;
+    }
+
+    private void fetchDayData(String dayOfTheWeek) {
+        email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        DocumentReference documentReference = db.collection(getString(R.string.collection_user)).document(email);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
+                if(user != null) {
+                    branch = user.getBRANCH();
+                    college = user.getCOLLEGE();
+                    Log.d("branch","and college done");
+                } else {
+                    Log.d("failed for user","failed for user");
+                }
+            }
+        });
+
+
+        db.collection(getString(R.string.collection_time_table)).document(branch)
+                .collection("Mon")
+            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("doc fetching", document.getId() + " => " + document.getData());
+                        subject = document.toObject(Subject.class);
+                        if(subject!=null) {
+                            mSubjectList.add(subject);
+                        }
+                    }
+                } else {
+                    Log.d("Error", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+
+        if(adapter!=null) {
+            adapter.setAdapterSettings(mSubjectList);
+        } else {
+            Log.d("adapter error","adapter hi bc null ho gaya!");
+        }
     }
 
     @Override
     public void onClickIcon(int position) {
-        String subjectLink = mSubjectList.get(position).getMeetLink();
+        String subjectLink = mSubjectList.get(position).getLINK();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(subjectLink));
         startActivity(browserIntent);
+    }
+
+    public void mondayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Monday").apply();
+        fetchDayData(fetchDayOfTheWeek());
+    }
+
+
+    public void tuesdayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Tuesday").apply();
+        fetchDayData(fetchDayOfTheWeek());
+    }
+
+    public void wednesdayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Wednesday").apply();
+        fetchDayData(fetchDayOfTheWeek());
+    }
+
+    public void thursdayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Thursday").apply();
+        fetchDayData(fetchDayOfTheWeek());
+    }
+
+    public void firdayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Friday").apply();
+        fetchDayData(fetchDayOfTheWeek());
+    }
+
+    public void saturdayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Saturday").apply();
+        fetchDayData(fetchDayOfTheWeek());
+    }
+
+    public void sundayButtonClicked(View view){
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Sunday").apply();
+        fetchDayData(fetchDayOfTheWeek());
     }
 }

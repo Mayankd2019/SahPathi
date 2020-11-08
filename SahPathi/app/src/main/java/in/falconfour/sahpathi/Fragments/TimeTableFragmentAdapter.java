@@ -10,16 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import in.falconfour.sahpathi.R;
 import in.falconfour.sahpathi.Subject;
 
 public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFragmentAdapter.TimeTableCardViewHolder> {
 
-    private ArrayList<Subject> mSubjectList;
+    private ArrayList<Subject> mSubjectList = new ArrayList<>();
     public JoiningLinkClickListener joiningLinkClickListener;
     private Context mContext;
+    private HashMap<String,Object> timeTableOfDayHashMap = new HashMap<>();
 
     public TimeTableFragmentAdapter(Context context, JoiningLinkClickListener joiningLinkClickListener){
         mContext = context;
@@ -27,8 +30,10 @@ public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFrag
     }
 
     public void setAdapterSettings(ArrayList<Subject> Subjects) {
-        mSubjectList = Subjects;
-        notifyDataSetChanged();
+        if(Subjects!=null) {
+            mSubjectList = Subjects;
+            notifyDataSetChanged();
+        }
     }
 
     @NonNull
@@ -42,10 +47,10 @@ public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFrag
     @Override
     public void onBindViewHolder(@NonNull TimeTableCardViewHolder holder, int position) {
         Subject subject = mSubjectList.get(position);
-        holder.startTimeTv.setText(subject.getStartTime());
-        holder.endTimeTv.setText(subject.getEndTime());
-        holder.subjectTv.setText(subject.getSubjectName());
-        holder.teacherTv.setText(subject.getTeacherName());
+        holder.startTimeTv.setText(subject.getSTART_TIME());
+        holder.endTimeTv.setText(subject.getEND_TIME());
+        holder.subjectTv.setText(subject.getSUBJECT());
+        //holder.teacherTv.setText(subject.getTeacherName());
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,11 +15,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -28,6 +33,8 @@ public class SignupActivity extends AppCompatActivity {
    private FirebaseAuth mAuth;
     // Access a Cloud Firestore instance from your Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private HashMap<String,Object> userHashMap = new HashMap<>();
 
    private EditText signupEmailTv;
    private EditText signupPasswordTv;
@@ -84,9 +91,24 @@ public class SignupActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
                                         FirebaseUser currentUser = mAuth.getCurrentUser();
+                                        //userHashMap.put(getString(R.string.user_data_email),email);
+                                        userHashMap.put(getString(R.string.user_data_college),college);
+                                        userHashMap.put(getString(R.string.user_data_branch),branch);
+                                        db.collection(getString(R.string.collection_user)).document(email).set(userHashMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("yo congo","user add ho gaya");
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("ye lo bd","yahi tull ho gaya");
+                                            }
+                                        });
                                         goToApplication(currentUser);
                                     } else {
-
+                                        Log.d("bcc","ye user ka identity nahi accept kiya bc");
                                     }
                                 }
                             });
@@ -106,8 +128,10 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void goToApplication(FirebaseUser currentUser) {
+        Log.d("ye to ho gaya be","congo");
         Intent myIntent2 =new Intent(SignupActivity.this, MainActivity.class);
         startActivity(myIntent2);
+
     }
 
 }

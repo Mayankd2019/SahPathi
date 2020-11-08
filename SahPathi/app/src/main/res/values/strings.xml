@@ -38,4 +38,12 @@
     <string name="next_btn">Next</string>
     <string name="let_get_started">Lets Get Started</string>
 
+
+    <string name="user_data_email">EMAIL</string>
+    <string name="user_data_branch">BRANCH</string>
+    <string name="user_data_college">COLLEGE</string>
+    <string name="collection_user">users</string>
+    <string name="collection_time_table">timetable</string>
+    <string name="document_user_info">user-info</string>
+
 </resources>

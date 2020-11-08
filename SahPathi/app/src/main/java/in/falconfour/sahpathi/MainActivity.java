@@ -40,27 +40,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,R.id.fragment);
         bottomNavigationView = findViewById(R.id.main_bottom_nav_view);
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
-        /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getTitle().toString()){
-                    case "Time Table" :
 
-                        break;
-                    case "Resources" :
-                        break;
-                    case "Profile" :
-                        break;
-                }
-                return false;
-            }
-        });*/
+
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
                     public void onComplete(@NonNull Task<String> task) {
                         if (!task.isSuccessful()) {
-                            //Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            Log.d("token issue", "Fetching FCM registration token failed", task.getException());
                             return;
                         }
 
@@ -74,5 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();*/
                     }
                 });
+
     }
 }

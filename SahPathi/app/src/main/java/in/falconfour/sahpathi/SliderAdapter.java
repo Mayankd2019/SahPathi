@@ -9,73 +9,63 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
+
+import java.util.List;
 
 
 public class SliderAdapter extends PagerAdapter {
 
-    Context context;
-    LayoutInflater layoutInflater;
+    Context mContext ;
+    List<ScreenItem> mListScreen;
 
-    public SliderAdapter(Context context){
-        this.context=context;
+    public SliderAdapter(Context mContext, List<ScreenItem> mListScreen) {
+        this.mContext = mContext;
+        this.mListScreen = mListScreen;
     }
 
-    public int[] slideImages = {
-            R.drawable.timetable,
-            R.drawable.notifications,
-            R.drawable.mobile
-    };
 
-    public String[] slideHeadings ={
-            "Plan your classes well! ",
-            "Stay Updated ",
-            "Your Smart Friend "
-    };
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-    public String[] slideDescriptions ={
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layoutScreen = inflater.inflate(R.layout.onboarding_slides,null);
 
-            "description1",
-            "description2",
-            "description3"
+        ImageView imgSlide = layoutScreen.findViewById(R.id.intro_img);
+        TextView title = layoutScreen.findViewById(R.id.intro_title);
+        TextView description = layoutScreen.findViewById(R.id.intro_description);
 
-    };
+        title.setText(mListScreen.get(position).getTitle());
+        description.setText(mListScreen.get(position).getDescription());
+        imgSlide.setImageResource(mListScreen.get(position).getScreenImg());
 
+        container.addView(layoutScreen);
+
+        return layoutScreen;
+
+
+
+
+
+    }
 
     @Override
     public int getCount() {
-        return slideHeadings.length;
+        return mListScreen.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view == (ConstraintLayout) object;
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+        return view == o;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.onboarding_slides, container, false);
+        container.removeView((View)object);
 
-        ImageView slideImageView = (ImageView) view.findViewById(R.id.slider_image);
-        TextView slideHeading = (TextView) view.findViewById(R.id.slider_heading);
-        TextView slideDescription = (TextView) view.findViewById(R.id.slider_desc);
-
-        slideImageView.setImageResource(slideImages[position]);
-        slideHeading.setText(slideHeadings[position]);
-        slideDescription.setText(slideDescriptions[position]);
-
-        container.addView(view);
-
-        return view;
-
-    }
-
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((ConstraintLayout) object);  //todo: RelativeLayout??
     }
 }

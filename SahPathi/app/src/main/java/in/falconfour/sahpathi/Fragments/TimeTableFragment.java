@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,6 +53,15 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
     private String branch;
     private String college;
 
+    private Button monday_btn;
+    private Button tuesday_btn;
+    private Button wednesday_btn;
+    private Button thursday_btn;
+    private Button friday_btn;
+    private Button saturday_btn;
+    private Button sunday_btn;
+
+
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -76,6 +86,60 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
 
         dayOfTheWeek = getActivity().getPreferences(Context.MODE_PRIVATE).getString("DAY_OF_THE_WEEK","Mon");
         fetchDayData(dayOfTheWeek);
+
+        monday_btn=(Button)v.findViewById(R.id.mon_button);
+        tuesday_btn=(Button)v.findViewById(R.id.tue_button);
+        wednesday_btn=(Button)v.findViewById(R.id.wed_button);
+        thursday_btn=(Button)v.findViewById(R.id.thu_button);
+        friday_btn=(Button)v.findViewById(R.id.fri_button);
+        saturday_btn=(Button)v.findViewById(R.id.sat_button);
+        sunday_btn=(Button)v.findViewById(R.id.sun_button);
+
+        monday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        tuesday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        wednesday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        thursday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        friday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        saturday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        sunday_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
         return v;
     }
@@ -137,39 +201,8 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         startActivity(browserIntent);
     }
 
-    public void mondayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Monday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
 
 
-    public void tuesdayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Tuesday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
 
-    public void wednesdayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Wednesday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
-
-    public void thursdayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Thursday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
-
-    public void firdayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Friday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
-
-    public void saturdayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Saturday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
-
-    public void sundayButtonClicked(View view){
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("DAY_OF_THE_WEEK","Sunday").apply();
-        fetchDayData(fetchDayOfTheWeek());
-    }
 }
+

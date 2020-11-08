@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,9 +46,10 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
-    ImageView dpchange;
+    public ImageView dpchange;
     private ImageView logoutIv;
     private TextView logoutTv;
+    private View myView;
 
     private FirebaseAuth mAuth;
     public ProfileFragment() {
@@ -57,6 +59,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
 
     }
@@ -66,7 +70,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         View myView = inflater.inflate(R.layout.fragment_profile, container, false);
+          myView = inflater.inflate(R.layout.fragment_profile, container, false);
          logoutTv = myView.findViewById(R.id.logoutTv);
          logoutIv = myView.findViewById(R.id.logout_iv);
 
@@ -141,10 +145,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-
-
+            ImageView viewImage= (ImageView)myView.findViewById(R.id.circlepic);
             if (requestCode == 1) {
-                File f = new File(Environment.getExternalStorageState().toString());
+                File f = new File(Environment.getExternalStorageState());
                 for (File temp : f.listFiles()) {
                     if (temp.getName().equals("temp.jpg")) {
                         f = temp;
@@ -154,15 +157,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
                 try {
                     String[] projection = new String[0];
-
-                    final Cursor cursor = getContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    final Cursor cursor = this.getContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                             projection, null, null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
                     if (Build.VERSION.SDK_INT >= 29) {
 
                         Uri imageUri= ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cursor.getInt(0));
 
                         Uri mediaUri = null;
-                        try (ParcelFileDescriptor pfd = getContext().getContentResolver().openFileDescriptor(mediaUri, "r")) {
+                        try (ParcelFileDescriptor pfd = this.getContext().getContentResolver().openFileDescriptor(mediaUri, "r")) {
                             if (pfd != null) {
                                 Bitmap bitmap = BitmapFactory.decodeFileDescriptor(pfd.getFileDescriptor());
                             }
@@ -178,7 +180,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
                         bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
                                 bitmapOptions);
-
+                        viewImage.setImageBitmap(bitmap);
                         String path = android.os.Environment
                                 .getExternalStorageState()
                                 + File.separator
@@ -211,10 +213,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
                 Log.w("path of image from gallery......******************.........", picturePath+"");
-
+                viewImage.setImageBitmap(thumbnail);
             }
         }
     }
+
 
 
 }

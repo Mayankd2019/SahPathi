@@ -15,11 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +34,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import in.falconfour.sahpathi.MainActivity;
 import in.falconfour.sahpathi.R;
 import in.falconfour.sahpathi.SignupActivity;
 import in.falconfour.sahpathi.Subject;
@@ -41,9 +45,6 @@ import in.falconfour.sahpathi.User;
  */
 public class TimeTableFragment extends Fragment implements TimeTableFragmentAdapter.JoiningLinkClickListener {
     private ArrayList<Subject> mSubjectList ;
-    //private ArrayList<HashMap<String,Object>> mSubjectList2;
-    //private HashMap<String,Object> subjectHashMap = new HashMap<>();
-    //private Subject subject = new Subject();
 
 
     private RecyclerView timeTableFragmentRv;
@@ -61,10 +62,13 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
     private Button friday_btn;
     private Button saturday_btn;
     private Button sunday_btn;
+    private TextView dayDisplayTv;
 
 
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db ;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     public TimeTableFragment() {
         // Required empty public constructor
@@ -76,6 +80,17 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_time_table, container, false);
+        initializingViews(v);
+
+
+
+        setOnClickListeners();
+
+        return v;
+    }
+
+
+    private void initializingViews(View v) {
         timeTableFragmentRv = v.findViewById(R.id.time_table_fragment_rv);
         layoutManager = new LinearLayoutManager(v.getContext());
         adapter = new TimeTableFragmentAdapter(getContext(),this);
@@ -83,19 +98,37 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         timeTableFragmentRv.setAdapter(adapter);
         mSubjectList = new ArrayList<>();
 
-        adapter.setAdapterSettings(mSubjectList);
+        monday_btn= v.findViewById(R.id.mon_button);
+        tuesday_btn= v.findViewById(R.id.tue_button);
+        wednesday_btn= v.findViewById(R.id.wed_button);
+        thursday_btn= v.findViewById(R.id.thu_button);
+        friday_btn= v.findViewById(R.id.fri_button);
+        saturday_btn= v.findViewById(R.id.sat_button);
+        sunday_btn= v.findViewById(R.id.sun_button);
+        dayDisplayTv = v.findViewById(R.id.day_display_tv);
 
-        dayOfTheWeek = getActivity().getPreferences(Context.MODE_PRIVATE).getString("DAY_OF_THE_WEEK","Mon");
-        fetchDayData(dayOfTheWeek);
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        if(mUser != null) {
+            email = mUser.getEmail();
+        }
+        db.collection("users").document(email).get()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                        if(user != null) {
+                            college = user.getCOLLEGE();
+                            branch = user.getBRANCH();
+                            Toast.makeText(getContext(),"branch " + branch,Toast.LENGTH_SHORT).show();
+                            fetchDayData("Tue");
+                        }
+                    }
+                });
+    }
 
-        monday_btn=(Button)v.findViewById(R.id.mon_button);
-        tuesday_btn=(Button)v.findViewById(R.id.tue_button);
-        wednesday_btn=(Button)v.findViewById(R.id.wed_button);
-        thursday_btn=(Button)v.findViewById(R.id.thu_button);
-        friday_btn=(Button)v.findViewById(R.id.fri_button);
-        saturday_btn=(Button)v.findViewById(R.id.sat_button);
-        sunday_btn=(Button)v.findViewById(R.id.sun_button);
-
+    private void setOnClickListeners() {
         monday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,96 +138,68 @@ public class TimeTableFragment extends Fragment implements TimeTableFragmentAdap
         tuesday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchDayData("Mon");
+                fetchDayData("Tue");
             }
         });
 
         wednesday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchDayData("Wed");
             }
         });
         thursday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchDayData("Mon");
+                fetchDayData("Thu");
             }
         });
         friday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchDayData("Mon");
+                fetchDayData("Fri");
             }
         });
         saturday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchDayData("Mon");
+                fetchDayData("Sat");
             }
         });
         sunday_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchDayData("Mon");
+                fetchDayData("Sun");
             }
         });
-
-
-
-        return v;
     }
 
     private void fetchDayData(String dayOfTheWeek) {
-        email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-        /*DocumentReference documentReference = db.collection(getString(R.string.collection_user)).document(email);
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
-                if(user != null) {
-                    branch = user.getBRANCH();
-                    college = user.getCOLLEGE();
-                    Log.d("branch","and college done");
-                } else {
-                    Log.d("failed for user","failed for user");
-                }
-            }
-        });*/
-
-
-        db.collection("timetable").document("ICE")
-                .collection("Mon")
-            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("doc fetching", document.getId() + " => " + document.getData());
-                        Subject subject = document.toObject(Subject.class);
-                        if(subject!=null) {
-                            mSubjectList.add(subject);
+        Log.d("subject doc","we reached here");
+        dayDisplayTv.setText(dayOfTheWeek);
+        mSubjectList.clear();
+        Toast.makeText(getContext(),"Subject added"+mSubjectList.size(),Toast.LENGTH_SHORT).show();
+            db.collection("timetable").document(branch)
+                    .collection(dayOfTheWeek)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("subject doc","we reached here");
+                                    Subject newSubject = document.toObject(Subject.class);
+                                    mSubjectList.add(newSubject);
+                                    Toast.makeText(getContext(),"Subject added"+mSubjectList.size(),Toast.LENGTH_SHORT).show();
+                                    //adapter.addSubject(newSubject);
+                                }
+                                adapter.changeData(mSubjectList);
+                            } else {
+                                Toast.makeText(getContext(),"getting timetable not successful",Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    });
 
-                    }
-
-                } else {
-                    Log.d("Error", "Error getting documents: ", task.getException());
-                }
-            }
-        });
-
-
-        if(adapter!=null) {
-            if(mSubjectList==null){
-                Log.d("subject list","null how come");
-            }
-            adapter.setAdapterSettings(mSubjectList);
-
-        } else {
-            Log.d("adapter error","adapter hi bc null ho gaya!");
-        }
     }
 
     @Override

@@ -37,20 +37,24 @@ public class LoginActivity extends AppCompatActivity {
     private TextView signupTv;
     private ProgressBar loginProgressBar;
 
-    private FirebaseAuth mAuth;
-
     private String loginEmail;
     private String loginPassword;
 
     // Access a Cloud Firestore instance from your Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         //basic findview stuff
+        initializingViews();
+        settingUpClickListeners();
+    }
+
+    private void initializingViews() {
         loginEmailEt = findViewById(R.id.login_email);
         loginPasswordEt = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
@@ -59,7 +63,22 @@ public class LoginActivity extends AppCompatActivity {
 
         //get FireBase Authentication object instance
         mAuth = FirebaseAuth.getInstance();
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user =  firebaseAuth.getCurrentUser();
+                if (user != null){
+                    //signed in
+                    loginProgressBar.setVisibility(View.INVISIBLE);
+                    goToApplication(user);
+                } else {
+                    //signed out
+                }
+            }
+        };
+    }
 
+    private void settingUpClickListeners() {
         signupTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,57 +92,26 @@ public class LoginActivity extends AppCompatActivity {
                 loginProgressBar.setVisibility(View.VISIBLE);
                 loginEmail = loginEmailEt.getText().toString();
                 loginPassword = loginPasswordEt.getText().toString();
-                mAuth.signInWithEmailAndPassword(loginEmail,loginPassword).addOnCompleteListener(LoginActivity.this,
-                        new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            loginProgressBar.setVisibility(View.INVISIBLE);
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
-                            goToApplication(currentUser);
-                        } else {
-
-                        }
-                    }
-                });
+                mAuth.signInWithEmailAndPassword(loginEmail,loginPassword);
             }
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
     private void goToApplication(FirebaseUser currentUser) {
+
         Intent myIntent2 =new Intent(LoginActivity.this, MainActivity.class);
         startActivity(myIntent2);
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            //Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        /*SharedPreferences loginActivitySharedPreferences = getPreferences(MODE_PRIVATE);
-                        loginActivitySharedPreferences.edit().putString("TOKEN", token);*/
-                        HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("token", token);
-                        hashMap.put("createdAt", Calendar.getInstance().getTime());
-                        db.collection("tokens").add(hashMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w("TAG", "Error adding document", e);
-                                    }
-                                    // Log and toast
-                        /*String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();*/
-                                });
-                    }
-                });
     }
 }

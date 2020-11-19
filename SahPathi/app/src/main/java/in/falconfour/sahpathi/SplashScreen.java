@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
 
-    public static final int SPLASH_TIME_OUT=4000;
+    public static final int SPLASH_TIME_OUT=1000;
 
     //Animation
     private Animation top_animation, bottom_animation, middle_animation;

@@ -31,9 +31,9 @@ public class SignupActivity extends AppCompatActivity {
    private Button done;
 
    private FirebaseAuth mAuth;
+   private FirebaseAuth.AuthStateListener mAuthStateListener;
     // Access a Cloud Firestore instance from your Activity
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private FirebaseFirestore db;
     private HashMap<String,Object> userHashMap = new HashMap<>();
 
    private EditText signupEmailTv;
@@ -41,11 +41,12 @@ public class SignupActivity extends AppCompatActivity {
    private EditText signupCollegeTv;
    private EditText signupBranchTv;
    private ProgressBar signupProgressBar;
+   private SharedPreferences signupSharedPref;
 
-   private String email;
-   private String password;
-   public String branchSignUp;
-   private String college;
+   private static String email;
+   private static String password;
+   public static String branchSignUp;
+   private static String college;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +54,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         //basic  find view stuff
-        login= (TextView)findViewById(R.id.logintext);
-        done=(Button)findViewById(R.id.done_button);
-        signupEmailTv = findViewById(R.id.sign_up_email);
-        signupBranchTv = findViewById(R.id.sign_up_branch);
-        signupPasswordTv = findViewById(R.id.sign_up_password);
-        signupCollegeTv = findViewById(R.id.sign_up_college);
-        signupProgressBar = findViewById(R.id.progressBar_signup);
-        final SharedPreferences signupSharedPref = getPreferences(Context.MODE_PRIVATE);
-
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        initializingViews();
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -81,54 +72,68 @@ public class SignupActivity extends AppCompatActivity {
                 password = signupPasswordTv.getText().toString();
                 branchSignUp = signupBranchTv.getText().toString();
                 college = signupCollegeTv.getText().toString();
-                SharedPreferences.Editor signupSharedPreferenceEditor = signupSharedPref.edit();
-                signupSharedPreferenceEditor.putString("BRANCH", branchSignUp).apply();
-                signupSharedPreferenceEditor.putString("COLLEGE",college).apply();
                 if(password.length() >= 6 && email != null ){
-                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this,
-                            new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
-                                        FirebaseUser currentUser = mAuth.getCurrentUser();
-                                        //userHashMap.put(getString(R.string.user_data_email),email);
-                                        userHashMap.put(getString(R.string.user_data_college),college);
-                                        userHashMap.put(getString(R.string.user_data_branch), branchSignUp);
-                                        db.collection(getString(R.string.collection_user)).document(email).set(userHashMap)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d("yo congo","user add ho gaya");
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.d("ye lo bd","yahi tull ho gaya");
-                                            }
-                                        });
-                                        goToApplication(currentUser);
-                                    } else {
-                                        Log.d("bcc","ye user ka identity nahi accept kiya bc");
-                                    }
-                                }
-                            });
+                    SharedPreferences.Editor signupSharedPreferenceEditor = signupSharedPref.edit();
+                    signupSharedPreferenceEditor.putString("BRANCH", branchSignUp).apply();
+                    signupSharedPreferenceEditor.putString("COLLEGE",college).apply();
+                    userHashMap.put("BRANCH",branchSignUp);
+                    userHashMap.put("COLLEGE",college);
+                    userHashMap.put("token",null);
+                    userHashMap.put("createdAt",null);
+                    mAuth.createUserWithEmailAndPassword(email,password);
                 }
             }
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //check whether the user is already signed in or  not
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            goToApplication(currentUser);
-        }
+    private void initializingViews() {
+        login= findViewById(R.id.logintext);
+        done= findViewById(R.id.done_button);
+        signupEmailTv = findViewById(R.id.sign_up_email);
+        signupBranchTv = findViewById(R.id.sign_up_branch);
+        signupPasswordTv = findViewById(R.id.sign_up_password);
+        signupCollegeTv = findViewById(R.id.sign_up_college);
+        signupProgressBar = findViewById(R.id.progressBar_signup);
+        signupSharedPref = getApplicationContext().getSharedPreferences("SIGN_UP_DETAILS",Context.MODE_PRIVATE);
+        db = FirebaseFirestore.getInstance();
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    //signed in
+                    db.collection("users").document(user.getEmail()).set(userHashMap).addOnSuccessListener(SignupActivity.this,
+                            new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            signupProgressBar.setVisibility(View.INVISIBLE);
+                            Log.d("user info","written successfully");
+                            goToApplication();
+                        }
+                    });
+                } else {
+                    //signed out
+                }
+            }
+        };
     }
 
-    private void goToApplication(FirebaseUser currentUser) {
-        Log.d("ye to ho gaya be","congo");
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
+    private void goToApplication() {
+        Log.d("Sign up","done ");
         Intent myIntent2 =new Intent(SignupActivity.this, MainActivity.class);
         startActivity(myIntent2);
 

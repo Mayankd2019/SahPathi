@@ -20,7 +20,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/mybtn2" />
+            app:srcCompat="@drawable/time_table_item_backgroud" />
 
         <TextView
             android:id="@+id/subject_tv"
@@ -69,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorPrimary"
             android:fontFamily="@font/adobecleanregular"
-            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/end_time_tv"
             app:layout_constraintTop_toBottomOf="@+id/subject_tv"

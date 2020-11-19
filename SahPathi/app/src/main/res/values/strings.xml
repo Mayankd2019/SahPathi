@@ -17,6 +17,7 @@
     <string name="time_table_fragment_fri">Fri</string>
     <string name="time_table_fragment_sat">Sat</string>
     <string name="time_table_fragment_sun">Sun</string>
+    <string name="time_table_fragment_day_display_default">Default</string>
 
 
     <string name="resources_fragment_heading">My Resources</string>

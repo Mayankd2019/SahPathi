@@ -26,8 +26,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,6 +41,7 @@ import java.io.OutputStream;
 import in.falconfour.sahpathi.LoginActivity;
 import in.falconfour.sahpathi.MainActivity;
 import in.falconfour.sahpathi.R;
+import in.falconfour.sahpathi.User;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -50,8 +54,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private ImageView logoutIv;
     private TextView logoutTv;
     private View myView;
+    private TextView userNameTv;
+    private TextView branchTv;
+    private TextView collegeTv;
+    private TextView groupTv;
 
     private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseFirestore mDb;
+    private User objectUser;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -73,6 +84,25 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
           myView = inflater.inflate(R.layout.fragment_profile, container, false);
          logoutTv = myView.findViewById(R.id.logoutTv);
          logoutIv = myView.findViewById(R.id.logout_iv);
+         userNameTv = myView.findViewById(R.id.user_name_tv);
+         collegeTv = myView.findViewById(R.id.college_name_tv);
+         branchTv = myView.findViewById(R.id.branch_tv);
+         groupTv = myView.findViewById(R.id.group_tv);
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDb = FirebaseFirestore.getInstance();
+        userNameTv.setText(mUser.getEmail());
+        mDb.collection("users").document(mUser.getEmail()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        objectUser = documentSnapshot.toObject(User.class);
+                        collegeTv.setText(objectUser.getCOLLEGE());
+                        branchTv.setText(objectUser.getBRANCH());
+                    }
+                });
 
 
          //picking up the dp
@@ -83,7 +113,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 //logging Out
-                mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }

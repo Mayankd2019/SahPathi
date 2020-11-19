@@ -20,19 +20,20 @@ import in.falconfour.sahpathi.Subject;
 
 public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFragmentAdapter.TimeTableCardViewHolder> {
 
-    private ArrayList<Subject> mSubjectList = new ArrayList<>();
+    public ArrayList<Subject> mSubjectList ;
     public JoiningLinkClickListener joiningLinkClickListener;
     private Context mContext;
-    private HashMap<String,Object> timeTableOfDayHashMap = new HashMap<>();
 
     public TimeTableFragmentAdapter(Context context, JoiningLinkClickListener joiningLinkClickListener){
         mContext = context;
+        mSubjectList = new ArrayList<>();
         this.joiningLinkClickListener = joiningLinkClickListener;
     }
 
-    public void setAdapterSettings(ArrayList<Subject> Subjects) {
-        if(Subjects!=null) {
-            mSubjectList = Subjects;
+
+    public void changeData(ArrayList<Subject> subjects){
+        if(subjects != null) {
+            mSubjectList = subjects;
             notifyDataSetChanged();
         }
     }
@@ -51,7 +52,6 @@ public class TimeTableFragmentAdapter extends RecyclerView.Adapter<TimeTableFrag
         holder.startTimeTv.setText(subject.getSTART_TIME());
         holder.endTimeTv.setText(subject.getEND_TIME());
         holder.subjectTv.setText(subject.getSUBJECT());
-        //holder.teacherTv.setText(subject.getTeacherName());
     }
 
     @Override

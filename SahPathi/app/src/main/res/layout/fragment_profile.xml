@@ -37,12 +37,13 @@
         android:src="@drawable/branchicon" />
 
     <TextView
+        android:id="@+id/branch_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/adobecleanbold"
-        android:text="@string/branch"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/adobecleanbold"
+        android:text="@string/branch"
         android:textColor="@color/colorPrimary"
         android:textSize="20dp" />
 
@@ -71,6 +72,7 @@
         android:src="@drawable/groupicon" />
 
     <TextView
+        android:id="@+id/group_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="56dp"
@@ -97,7 +99,7 @@
       app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
   <TextView
-      android:id="@+id/textView5"
+      android:id="@+id/user_name_tv"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:fontFamily="@font/adobecleanbold"
@@ -130,12 +132,13 @@
         android:src="@drawable/university" />
 
     <TextView
+        android:id="@+id/college_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/adobecleanbold"
         android:text="@string/collegename"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="56dp"
         android:textColor="@color/colorPrimary"
         android:textSize="20dp" />
 
@@ -172,7 +175,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="148dp"
       android:src="@drawable/edit_icon"
-      app:layout_constraintBottom_toTopOf="@+id/textView5"
+      app:layout_constraintBottom_toTopOf="@+id/user_name_tv"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.605"
       app:layout_constraintStart_toStartOf="parent"
